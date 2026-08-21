@@ -13,53 +13,201 @@
   "paths": {
     "/api/estudiantes/": {
       "post": {
+        "tags": [
+          "Estudiantes"
+        ],
+        "summary": "Registrar un estudiante nuevo",
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
+        "responses": {
+          "201": {
+            "description": "201 Created",
             "schema": {
               "type": "object",
               "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 3
+                },
                 "nombre": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Juan"
                 },
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "juan123@gmail.com"
                 },
                 "bootcamp": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Backend"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "400 Bad Request"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "Estudiante",
+                "required": [
+                  "nombre",
+                  "email",
+                  "bootcamp"
+                ],
+                "properties": {
+                  "nombre": {
+                    "type": "string",
+                    "example": "Maria"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "maria123@gmail.com"
+                  },
+                  "bootcamp": {
+                    "type": "string",
+                    "example": "FrontEnd"
+                  }
                 }
               }
             }
           }
+        }
+      },
+      "get": {
+        "tags": [
+          "Estudiantes"
+        ],
+        "summary": "Listar estudiantes",
+        "description": "",
+        "parameters": [
+          {
+            "name": "bootcamp",
+            "in": "query",
+            "description": "Filtrar por bootcamp",
+            "required": false,
+            "type": "string"
+          }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Lista de estudiantes",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 3
+                  },
+                  "nombre": {
+                    "type": "string",
+                    "example": "Roberto"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "rober123@gmail.com"
+                  },
+                  "bootcamp": {
+                    "type": "string",
+                    "example": "Frontend"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
     },
     "/api/estudiantes/{id}": {
       "put": {
+        "tags": [
+          "Estudiantes"
+        ],
+        "summary": "Modifica un estudiante por ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "description": "ID numérico del producto"
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Estudiante modificado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "nombre": {
+                  "type": "string",
+                  "example": "Maria"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "maria456@gmail.com"
+                },
+                "bootcamp": {
+                  "type": "string",
+                  "example": "FullStack"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Estudiante no encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Estudiante no encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Estudiantes"
+        ],
+        "summary": "Elimina un estudiante del registro",
+        "description": "Elimina un estudiante del registro",
         "parameters": [
           {
             "name": "id",
@@ -75,6 +223,10 @@
         }
       },
       "get": {
+        "tags": [
+          "Estudiantes"
+        ],
+        "summary": "Obtener estudiante por ID",
         "description": "",
         "parameters": [
           {
@@ -85,8 +237,47 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Estudiante encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "nombre": {
+                  "type": "string",
+                  "example": "Maria"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "maria123@gmail.com"
+                },
+                "bootcamp": {
+                  "type": "string",
+                  "example": "Frontend"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Estudiante no encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Estudiante no encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
