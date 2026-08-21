@@ -14,6 +14,11 @@ const router = Router();
 let index:number = 1;
 
 router.post("/",(req:Request<{},{},crearEstudiante>,res:Response)=>{
+  /*
+    #swagger.tags = ['Estudiantes']
+    #swagger.summary = 'Postear'
+    #swagger.description = 'Agregar a un estudiante nuevo'
+  */
     const {nombre,email,bootcamp} = req.body;
     if(!email){
         return (res.status(400).json({error:"400 Bad Request"}));
